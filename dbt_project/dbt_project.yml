@@ -35,5 +35,9 @@ models:
     # Config indicated by + and applies to all files under models/example/
     # example:
     #   +materialized: view
-    stg:
+    intermediate:
+      +materializied: ephemeral
+    marts:
+      +materializied: view
+    staging:
       +materializied: view
