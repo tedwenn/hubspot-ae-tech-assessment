@@ -20,6 +20,7 @@ WITH
     SELECT
       m.listing_id
       ,m.date
+      ,DATE_ADD(m.date, INTERVAL c.minimum_nights DAY) AS default_min_end_date
       ,DATE_ADD(m.date, INTERVAL c.maximum_nights DAY) AS default_max_end_date
       ,ROW_NUMBER() OVER(PARTITION BY m.listing_id ORDER BY m.date ASC)
       - ROW_NUMBER() OVER(PARTITION BY m.listing_id, m.available ORDER BY m.date ASC) AS sequence_id
