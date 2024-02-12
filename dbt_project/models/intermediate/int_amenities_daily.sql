@@ -1,9 +1,6 @@
 SELECT
   c.listing_id
   ,c.date
-  ,c.price
-  ,c.available
-  ,c.reservation_id
   ,a.amenities
 FROM
   {{ ref('stg_calendar') }} AS c
