@@ -17,7 +17,7 @@ FROM
     FORMAT_DATE('%Y-%m', date) AS month
     ,SUM(price) AS total_revenue
     ,SUM(
-      CASE WHEN 'Air conditioning' IN UNNEST(amenities)
+      CASE WHEN 'air conditioning' IN UNNEST(amenities)
       THEN price
       END
     ) AS revenue_with_air_conditioning
