@@ -22,7 +22,7 @@ FROM
       END
     ) AS revenue_with_air_conditioning
   FROM
-    `hopeful-theorem-413815.dbt_hubspot_ae_tech_assessment.mart`
+    `hopeful-theorem-413815.dbt_hubspot_ae_tech_assessment.listings_daily`
   WHERE
     NOT available
   GROUP BY

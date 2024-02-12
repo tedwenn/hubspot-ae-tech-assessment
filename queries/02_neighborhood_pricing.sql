@@ -24,7 +24,7 @@ FROM
     ,price
     ,ANY_VALUE(price) OVER(PARTITION BY neighborhood, listing_id ORDER BY UNIX_DATE(date) ASC RANGE BETWEEN 364 PRECEDING AND 364 PRECEDING) AS price_364_days_prior
   FROM
-    `hopeful-theorem-413815.dbt_hubspot_ae_tech_assessment.mart`
+    `hopeful-theorem-413815.dbt_hubspot_ae_tech_assessment.listings_daily`
   )
 WHERE
   date = '2022-07-11'
