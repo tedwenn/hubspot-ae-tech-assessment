@@ -11,10 +11,10 @@ SELECT
   ,c.date
   ,av.minimum_nights
   ,av.maximum_nights
-  ,COALESCE(am.amenities, l.amenities) AS amenities
   ,c.price
   ,c.available
   ,c.reservation_id
+  ,am.* EXCEPT(listing_id, date)
 FROM
   {{ ref('stg_calendar') }} AS c
 LEFT JOIN
