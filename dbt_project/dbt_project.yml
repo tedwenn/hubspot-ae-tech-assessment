@@ -32,11 +32,16 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   dbt_project:
+    +persist_docs:
+      relation: true
+      columns: true
     intermediate:
-      +materializied: ephemeral
+      materialized: ephemeral
     marts:
-      +materializied: table
+      materialized: table
     staging:
-      +materializied: view
-      base:
-        +materializied: ephemeral
+      materialized: view
+
+seeds:
+  schema: seed_data
+  file_format: csv

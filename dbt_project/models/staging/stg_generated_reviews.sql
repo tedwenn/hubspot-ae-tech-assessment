@@ -1,4 +1,7 @@
 SELECT
-  *
+  ID AS review_id
+  ,LISTING_ID AS listing_id
+  ,REVIEW_SCORE AS review_score
+  ,REVIEW_DATE AS review_date
 FROM
-  `hopeful-theorem-413815.source_hubspot_ae_tech_assessment.generated_reviews`
+  {{ ref('seed_generated_reviews') }}

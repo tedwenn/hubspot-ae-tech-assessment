@@ -3,8 +3,8 @@
 ) }}
 
 SELECT
-  * EXCEPT(change_at, amenities)
-  ,PARSE_DATETIME('%Y-%m-%d %H:%M:%S', change_at) AS change_at
+  LISTING_ID AS listing_id
+  ,PARSE_DATETIME('%Y-%m-%d %H:%M:%E*S', change_at) AS change_at
   ,`{{ target.project }}`.`{{ target.dataset }}`.JsonStringToArray(amenities) AS amenities
 FROM
-  `hopeful-theorem-413815.source_hubspot_ae_tech_assessment.amenities_changelog`
+  {{ ref('seed_amenities_changelog') }}
