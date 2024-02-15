@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: listings_daily
+    description: "Daily data on every listing used for analysis purposes."
+    columns:
+      - name: listing_id
+        description: "Unique ID for this listing. Part of the Primary Key."
+        tests:
+          - not_null
+      - name: host_id
+        description: "Unique ID for the Host who owns this property."
+        tests:
+          - not_null
+      - name: neighborhood
+        description: "The neighborhood where this listing is located."
+      - name: property_type
+        description: "Description of the type of property."
+      - name: room_type
+        description: "Description of the type of room."
+      - name: accommodates
+        description: "Number of guests this room can accommodate."
+      - name: bathrooms_text
+        description: "Number and types of bathrooms available."
+      - name: bedrooms
+        description: "Number of bedrooms available for use."
+      - name: beds
+        description: "Number of beds available for use."
+      - name: date
+        description: "Date of availability this row describes. Part of the Primary Key."
+      - name: minimum_nights
+        description: "The minimum number of nights that must be booked consecutively for this property. NULL if default minimum isn't available on starting this date."
+      - name: maximum_nights
+        description: "The maximum number of nights of that may be booked consecutively for this property, starting on date, based on current availability. NULL if no availability starting on date."
+      - name: amenities
+        description: "Array of amenities available for guests on the date."
+      - name: price
+        description: "The USD price to rent this property on DATE."
+      - name: available
+        description: "Boolean representing whether or not the property is available on the date."
+      - name: reservation_id
+        description: "Unique ID for that DATE's reservation. Foreign key. If NULL, there was no reservation on that date."

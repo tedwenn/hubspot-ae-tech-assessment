@@ -1,8 +1,12 @@
 SELECT
-  * EXCEPT(available, reservation_id)
-  ,CASE WHEN available = 't' THEN TRUE
-  WHEN available = 'f' THEN FALSE
+  LISTING_ID AS listing_id
+  ,DATE AS date
+  ,CASE WHEN AVAILABLE = 't' THEN TRUE
+  WHEN AVAILABLE = 'f' THEN FALSE
   END AS available
-  ,SAFE_CAST(reservation_id AS INT64) AS reservation_id
+  ,SAFE_CAST(RESERVATION_ID AS INT64) AS reservation_id
+  ,PRICE AS price
+  ,MINIMUM_NIGHTS AS minimum_nights
+  ,MAXIMUM_NIGHTS AS maximum_nights
 FROM
-  `hopeful-theorem-413815.source_hubspot_ae_tech_assessment.calendar`
+  {{ ref('seed_calendar') }}
