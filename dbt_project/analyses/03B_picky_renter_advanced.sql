@@ -2,15 +2,18 @@
 
 #3 - Long Stay / Picky Renter
 
-(A)
-  Write a query to find the maximum duration one could stay in each of
-  these listings, based on the availability and what the owner allows.
+(B)
+  Write a variation of the maximum duration query above for listings
+  that have both a lockbox and a first aid kit listed in the amenities.
 
 Tip:
-  For example, listing 863788 is heavily booked. The largest timespan for
-  which it is available is four days from September 18th to 21st in 2021.
-  The correct solution should show that three listings are tied for the
-  longest possible stay.
+  For example, listing 10986 has a lockbox. The correct result should
+  show that across the results, the longest possible stay is much shorter
+  than the answer to #3.
+
+Enhancement vs basic solution:
+  This version of the query accounts for the possibility that the desired
+  amenities could change during the availability period.
 
 */
 
@@ -23,11 +26,17 @@ WITH
       ,DATE_ADD(date, INTERVAL minimum_nights DAY) AS default_min_end_date
       ,DATE_ADD(date, INTERVAL maximum_nights DAY) AS default_max_end_date
       ,ROW_NUMBER() OVER(PARTITION BY listing_id ORDER BY date ASC)
-      - ROW_NUMBER() OVER(PARTITION BY listing_id, available ORDER BY date ASC) AS sequence_id
+      - ROW_NUMBER() OVER(PARTITION BY listing_id, picky_available ORDER BY date ASC) AS sequence_id
     FROM
       `hopeful-theorem-413815.dbt_hubspot_ae_tech_assessment.listings_daily`
+    CROSS JOIN
+      UNNEST([
+        available
+        AND has_first_aid_kit
+        AND has_lockbox
+      ]) AS picky_available
     QUALIFY
-      available -- needed unavailable for sequence calcs, but we don't need them going forward
+      picky_available -- needed unavailable for sequence calcs, but we don't need them going forward
   )
 
   ,sequence_end_dates AS (
@@ -41,6 +50,8 @@ WITH
       ) AS end_date
     FROM
       sequences
+    QUALIFY
+      end_date >= default_min_end_date
   )
 
 SELECT
@@ -54,3 +65,4 @@ QUALIFY
   ROW_NUMBER() OVER(PARTITION BY listing_id ORDER BY available_days DESC, start_date ASC) = 1
 ORDER BY
   available_days DESC
+  ,listing_id ASC

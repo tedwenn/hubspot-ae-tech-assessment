@@ -20,14 +20,14 @@ FROM
   SELECT
     date
     ,neighborhood
-    ,listing_id
     ,price
     ,ANY_VALUE(price) OVER(PARTITION BY neighborhood, listing_id ORDER BY UNIX_DATE(date) ASC RANGE BETWEEN 364 PRECEDING AND 364 PRECEDING) AS price_364_days_prior
   FROM
     `hopeful-theorem-413815.dbt_hubspot_ae_tech_assessment.listings_daily`
+  QUALIFY
+    date = '2022-07-11'
+    AND price_364_days_prior IS NOT NULL -- only include listings that had a price on both days
   )
-WHERE
-  date = '2022-07-11'
 GROUP BY
   date
   ,neighborhood

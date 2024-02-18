@@ -28,6 +28,8 @@ models:
         description: "Number of beds available for use."
       - name: date
         description: "Date of availability this row describes. Part of the Primary Key."
+      - name: month
+        description: "Month of availability this row describes. String formatted as YYYY-MM."
       - name: minimum_nights
         description: "The minimum number of nights that must be booked consecutively for this property. NULL if default minimum isn't available on starting this date."
       - name: maximum_nights
@@ -36,7 +38,11 @@ models:
         description: "Array of amenities available for guests on the date."
       - name: price
         description: "The USD price to rent this property on DATE."
+      - name: revenue
+        description: "The USD revenue earned from that date. Equal to price when reserved, otherwise 0."
       - name: available
         description: "Boolean representing whether or not the property is available on the date."
+      - name: is_booked
+        description: "Boolean representing whether or not the property is booked on the date."
       - name: reservation_id
         description: "Unique ID for that DATE's reservation. Foreign key. If NULL, there was no reservation on that date."
