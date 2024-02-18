@@ -14,17 +14,11 @@ SELECT
 FROM
   (
   SELECT
-    FORMAT_DATE('%Y-%m', date) AS month
-    ,SUM(price) AS total_revenue
-    ,SUM(
-      CASE WHEN 'air conditioning' IN UNNEST(amenities)
-      THEN price
-      END
-    ) AS revenue_with_air_conditioning
+    month
+    ,SUM(revenue) AS total_revenue
+    ,SUM(IF(has_air_conditioning, revenue, 0)) AS revenue_with_air_conditioning
   FROM
     `hopeful-theorem-413815.dbt_hubspot_ae_tech_assessment.listings_daily`
-  WHERE
-    NOT available
   GROUP BY
     month
   )

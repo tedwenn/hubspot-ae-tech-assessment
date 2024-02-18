@@ -9,10 +9,13 @@ SELECT
   ,l.bedrooms
   ,l.beds
   ,c.date
+  ,FORMAT_DATE('%Y-%m', c.date) AS month
   ,av.minimum_nights
   ,av.maximum_nights
   ,c.price
+  ,IF(c.reservation_id IS NULL, 0, c.price) AS revenue
   ,c.available
+  ,c.reservation_id IS NOT NULL AS is_booked
   ,c.reservation_id
   ,am.* EXCEPT(listing_id, date)
 FROM
