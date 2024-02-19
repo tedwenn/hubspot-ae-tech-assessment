@@ -10,6 +10,8 @@ SELECT
   ,l.beds
   ,c.date
   ,FORMAT_DATE('%Y-%m', c.date) AS month
+  ,r.n_reviews
+  ,r.avg_review_score
   ,av.minimum_nights
   ,av.maximum_nights
   ,c.price
@@ -34,3 +36,7 @@ LEFT JOIN
 ON
   c.listing_id = am.listing_id
   AND c.date = am.date
+  {{ ref('intreviews_daily') }} AS r
+ON
+  c.listing_id = r.listing_id
+  AND c.date = r.date
