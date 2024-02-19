@@ -30,6 +30,10 @@ models:
         description: "Date of availability this row describes. Part of the Primary Key."
       - name: month
         description: "Month of availability this row describes. String formatted as YYYY-MM."
+      - name: n_reviews
+        description: "Number of reviews for listing as of day prior to date"
+      - name: avg_review_score
+        description: "Average score of reviews for listing as of day prior to date"
       - name: minimum_nights
         description: "The minimum number of nights that must be booked consecutively for this property. NULL if default minimum isn't available on starting this date."
       - name: maximum_nights
