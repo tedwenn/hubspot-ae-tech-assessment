@@ -6,7 +6,7 @@ SELECT
 FROM
   {{ ref('stg_calendar') }} AS c
 INNER JOIN
-  {{ ref('generated_reviews') }} AS r
+  {{ ref('stg_generated_reviews') }} AS r
 ON
   c.listing_id = r.listing_id
   AND c.date > r.review_date

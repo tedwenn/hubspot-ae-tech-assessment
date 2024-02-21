@@ -36,7 +36,7 @@ LEFT JOIN
 ON
   c.listing_id = am.listing_id
   AND c.date = am.date
-  {{ ref('intreviews_daily') }} AS r
+  {{ ref('int_reviews_daily') }} AS r
 ON
   c.listing_id = r.listing_id
   AND c.date = r.date
