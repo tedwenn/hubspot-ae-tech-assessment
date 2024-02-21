@@ -10,4 +10,4 @@ dbt seed
 dbt run --full-refresh
 # dbt test
 
-dbt docs generate
+# dbt docs generate
