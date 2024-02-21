@@ -36,6 +36,7 @@ LEFT JOIN
 ON
   c.listing_id = am.listing_id
   AND c.date = am.date
+LEFT JOIN
   {{ ref('int_reviews_daily') }} AS r
 ON
   c.listing_id = r.listing_id
